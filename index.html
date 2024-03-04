@@ -1,57 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vremea</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
-    <h1>Vremea </h1>
-    <div class="weather">
-        <h2>Condiții curente:</h2>
-        <p id="current-weather"></p>
-    </div>
-    <div class="hourly-weather">
-        <h2>Prognoza pe ore:</h2>
-        <ul id="hourly-list">
-            <!-- Aici vor fi afișate informațiile pe parcursul orei -->
-        </ul>
-    </div>
 
-    <script>
-        // Funcția pentru a face cererea API și a afișa datele
-        async function getWeather() {
-            try {
-                const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m");
-                const data = await response.json();
-
-                // Afișează condițiile curente
-                const currentWeather = data.current;
-                document.getElementById('current-weather').textContent = `Temperatura: ${currentWeather.temperature_2m}°C, Viteza vântului: ${currentWeather.wind_speed_10m} m/s`;
-
-                // Afișează prognoza pe ore
-                const hourlyWeather = data.hourly;
-                const hourlyList = document.getElementById('hourly-list');
-                hourlyList.innerHTML = ""; // Curăță lista existentă
-
-                hourlyWeather.time.forEach((time, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Ora ${index + 1}: Temperatura: ${hourlyWeather.temperature_2m[index]}°C, Umiditate relativă: ${hourlyWeather.relative_humidity_2m[index]}%, Viteza vântului: ${hourlyWeather.wind_speed_10m[index]} m/s`;
-                    hourlyList.appendChild(listItem);
-                });
-            } catch (error) {
-                console.log('A apărut o eroare:', error);
-                document.getElementById('current-weather').textContent = 'Nu am putut obține informațiile despre vreme.';
-            }
-        }
-
-        // Apelează funcția pentru a obține vremea când pagina este încărcată
-        window.onload = getWeather;
-    </script>
-
-
-
-<p>Așteaptă-maA  CASAAA CU FTINEEEE...</p>
+    <h1>salut</h1>
 </body>
-</html>
