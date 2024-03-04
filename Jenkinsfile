@@ -3,7 +3,6 @@ pipeline {
     
     environment {
         registry = "registry.cosmin-lab.cloud:5000"
-        dockerImage = "wather-app"
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
         kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
@@ -19,7 +18,12 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${registry}/${dockerImage}:1")
+                    // Obține primele 6 cifre ale hash-ului de commit
+                    def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    // Setează numele imaginii Docker
+                    dockerImage = "wather-app:${commitHash}"
+                    // Construiește imaginea Docker
+                    dockerImage = docker.build("${registry}/${dockerImage}")
                 }
             }
         }
@@ -50,3 +54,4 @@ pipeline {
         }
     }
 }
+
