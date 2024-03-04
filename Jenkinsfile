@@ -6,6 +6,7 @@ pipeline {
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
         kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
+        kubeConfigPath = "/var/lib/jenkins/.kube/config" // Definirea variabilei kubeConfigPath
     }
     
     stages {
@@ -41,9 +42,6 @@ pipeline {
         stage('Update YAML') {
             steps {
                 script {
-                    // Verificăm dacă variabila de mediu KUBECONFIG este setată
-                    def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
-                    
                     // Citim conținutul fișierului YAML într-o variabilă
                     def yamlContent = readFile("${kubeConfigs}")
                     
