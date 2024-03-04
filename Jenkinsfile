@@ -33,13 +33,15 @@ pipeline {
                 }
             }
         }
-        
-        stage('Deploy App') {
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh "kubectl apply -f ${kubeConfigs}"
+                    // Definiți comanda kubectl pentru a implementa resursele Kubernetes din fișierul myweb.yaml
+                    def deployCommand = "kubectl apply -f prod1.yaml"
+                    
+                    // Executați comanda utilizând sh
+                    sh deployCommand
                 }
             }
         }
     }
-}
