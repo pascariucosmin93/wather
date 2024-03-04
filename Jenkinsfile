@@ -35,15 +35,17 @@ pipeline {
             }
         }
           stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    
-                    def deployCommand = "kubectl apply -f prod1.yaml"
-                    
-                  
-                    sh deployCommand
-                }
-            }
+    steps {
+        script {
+            // Verificăm dacă variabila de mediu KUBECONFIG este setată
+            def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
+            
+            // Comanda de implementare a resurselor Kubernetes
+            def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f prod1.yaml"
+            
+            // Executăm comanda folosind 'sh'
+            sh deployCommand
         }
     }
 }
+
