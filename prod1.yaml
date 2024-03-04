@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wather-app-5
-  name: wather-app-5
+    app: wather-app-6
+  name: wather-app-6
   namespace: jenkins
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: wather-app-5
+      app: wather-app-6
   template:
     metadata:
       labels:
-        app: wather-app-5
+        app: wather-app-6
     spec:
       containers:
-        - image: registry.cosmin-lab.cloud:5000/wather-app:5
+        - image: registry.cosmin-lab.cloud:5000/wather-app:6
           imagePullPolicy: Always
           name: wather-app
       imagePullSecrets:
