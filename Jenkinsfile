@@ -3,10 +3,10 @@ pipeline {
     
     environment {
         registry = "registry.cosmin-lab.cloud:5000"
+        dockerImage = "wather-app"
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
         kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
-        kubeConfigPath = "/var/lib/jenkins/.kube/config" // Definirea variabilei kubeConfigPath
     }
     
     stages {
@@ -19,12 +19,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    // Obține ultimul commit și primele 6 caractere din hash
-                    def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                  
-                    dockerImage = "wather-app:${commitHash}"
-                    // Construiește imaginea Docker
-                    dockerImage = docker.build("${registry}/${dockerImage}")
+                    dockerImage = docker.build("${registry}/${dockerImage}:1")
                 }
             }
         }
@@ -39,24 +34,12 @@ pipeline {
             }
         }
         
-        stage('Update YAML') {
-            steps {
-                script {
-                    // Citim conținutul fișierului YAML într-o variabilă
-                    def yamlContent = readFile("${kubeConfigs}")
-                    
-                    // Construim noul conținut YAML actualizat cu numărul versiunii imaginii Docker
-                    def updatedYamlContent = yamlContent.replaceAll(/image: .*\/wather-app:.*/, "image: ${registry}/wather-app:${commitHash}")
-                    
-                    // Suprascriem fișierul YAML cu conținutul actualizat
-                    writeFile(file: "${kubeConfigs}", text: updatedYamlContent)
-                }
-            }
-        }
-        
         stage('Deploy to Kubernetes') {
             steps {
                 script {
+                    // Verificăm dacă variabila de mediu KUBECONFIG este setată
+                    def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
+                    
                     // Comanda de implementare a resurselor Kubernetes
                     def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f prod1.yaml"
                     
