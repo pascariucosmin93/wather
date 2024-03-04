@@ -6,7 +6,7 @@ metadata:
   name: wather-app-1
   namespace: jenkins
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: wather-app-1
