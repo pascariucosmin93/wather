@@ -16,7 +16,7 @@ spec:
         app: wather-app
     spec:
       containers:
-        - image: registry.cosmin-lab.cloud:5000/wather-app:1
+        - image: registry.cosmin-lab.cloud:5000/wather-app:2
           imagePullPolicy: Always
           name: wather-app
       imagePullSecrets:
@@ -35,5 +35,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80  
-      nodePort: 30200  
+      nodePort: 30201
   type: NodePort
