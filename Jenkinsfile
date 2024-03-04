@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${registry}/${dockerImage}:3")
+                    dockerImage = docker.build("${registry}/${dockerImage}:4")
                 }
             }
         }
