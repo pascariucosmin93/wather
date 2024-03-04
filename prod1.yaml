@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wather-app-4
-  name: wather-app-4
+    app: wather-app-5
+  name: wather-app-5
   namespace: jenkins
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: wather-app-4
+      app: wather-app-5
   template:
     metadata:
       labels:
-        app: wather-app-4
+        app: wather-app-5
     spec:
       containers:
-        - image: registry.cosmin-lab.cloud:5000/wather-app:1
+        - image: registry.cosmin-lab.cloud:5000/wather-app:5
           imagePullPolicy: Always
           name: wather-app
       imagePullSecrets:
@@ -31,9 +31,9 @@ metadata:
   namespace: jenkins
 spec:
   selector:
-    app: wather-app-4
+    app: wather-app-5
   ports:
     - protocol: TCP
       port: 80  
-      nodePort: 30203
+      nodePort: 30206
   type: NodePort
