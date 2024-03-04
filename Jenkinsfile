@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Obține ultimul commit și primele 6 caractere din hash
                     def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    // Setează numele imaginii Docker
+                  
                     dockerImage = "wather-app:${commitHash}"
                     // Construiește imaginea Docker
                     dockerImage = docker.build("${registry}/${dockerImage}")
