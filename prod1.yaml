@@ -34,5 +34,6 @@ spec:
     app: wather-app-1
   ports:
     - protocol: TCP
+      port: 10  
       nodePort: 30201
   type: NodePort
