@@ -3,12 +3,11 @@ pipeline {
     
     environment {
         registry = "registry.cosmin-lab.cloud:5000"
-        dockerImage = "prod1"
+        dockerImage = "wather-app"
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
-
+        kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
     }
-    
     
     stages {
         stage('Checkout Source') {
@@ -34,18 +33,20 @@ pipeline {
                 }
             }
         }
-          stage('Deploy to Kubernetes') {
-    steps {
-        script {
-            // Verificăm dacă variabila de mediu KUBECONFIG este setată
-            def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
-            
-            // Comanda de implementare a resurselor Kubernetes
-            def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f prod1.yaml"
-            
-            // Executăm comanda folosind 'sh'
-            sh deployCommand
+        
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Verificăm dacă variabila de mediu KUBECONFIG este setată
+                    def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
+                    
+                    // Comanda de implementare a resurselor Kubernetes
+                    def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f prod1.yaml"
+                    
+                    // Executăm comanda folosind 'sh'
+                    sh deployCommand
+                }
+            }
         }
     }
 }
-
