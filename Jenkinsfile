@@ -45,8 +45,8 @@ pipeline {
                     // Citim conținutul fișierului YAML într-o variabilă
                     def yamlContent = readFile("${kubeConfigs}")
                     
-                    // Construim noul conținut YAML actualizat cu numele imaginii Docker
-                    def updatedYamlContent = yamlContent.replaceAll(/dockerImage: .*/, "dockerImage: ${dockerImage}")
+                    // Construim noul conținut YAML actualizat cu numărul versiunii imaginii Docker
+                    def updatedYamlContent = yamlContent.replaceAll(/image: .*\/wather-app:.*/, "image: ${registry}/wather-app:${commitHash}")
                     
                     // Suprascriem fișierul YAML cu conținutul actualizat
                     writeFile(file: "${kubeConfigs}", text: updatedYamlContent)
