@@ -32,9 +32,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-app
+  name: vreme
   labels:
-    app: vreme
+    app: vreme  # Modificat aici pentru a se potrivi cu etichetele din deployment
 spec:
   selector:
     app: vreme
