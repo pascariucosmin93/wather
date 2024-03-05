@@ -21,7 +21,7 @@ spec:
           ports:
             - containerPort: 80
       imagePullSecrets:
-        - name: regcred2
+        - name: registry-credentials
 ---
 apiVersion: v1
 kind: Service
