@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: vreme
   labels:
     app: vreme
-  name: vreme
   namespace: jenkins
 spec:
   replicas: 2
@@ -16,25 +16,29 @@ spec:
         app: vreme
     spec:
       containers:
-        - name: vreme
-          image: registry.cosmin-lab.cloud:5000/vreme:1
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-      imagePullSecrets:
-        - name: regcred2
+      - name: vreme
+        image: registry.cosmin-lab.cloud:5000/vreme:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      dnsConfig:
+        options:
+        - name: ndots
+          value: "2"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: vreme
-  namespace: jenkins
+  name: web-app
+  labels:
+    app: vreme
 spec:
   selector:
     app: vreme
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30090 # Specificăm portul NodePort aici
-  type: NodePort # Specificăm tipul serviciului ca fiind NodePort
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer
