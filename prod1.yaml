@@ -21,6 +21,8 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: regcred2  # Numele secretului de imagine pentru pull din registry
       dnsConfig:
         options:
         - name: ndots
