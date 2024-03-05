@@ -33,6 +33,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: vreme
+  namespace: jenkins  # Specificăm spațiul de nume aici
   labels:
     app: vreme  # Modificat aici pentru a se potrivi cu etichetele din deployment
 spec:
