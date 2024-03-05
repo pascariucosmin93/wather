@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         registry = "registry.cosmin-lab.cloud:5000"
-        dockerImage = "wather-app"
+        dockerImage = "wather-app" // Corectează numele imaginii pentru Docker
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
         kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Source') {
             steps {
-                git branch: 'main', url: 'https://github.com/pascariucosmin93/wather.git'
+                git branch: 'main', url: 'https://github.com/pascariucosmin93/weather.git' // Corectează URL-ul pentru clonarea repo-ului
             }
         }
         
@@ -41,8 +41,7 @@ pipeline {
                     def kubeConfigPath = env.KUBECONFIG ?: "/var/lib/jenkins/.kube/config"
                     
                     // Comanda de implementare a resurselor Kubernetes
-                    def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f prod1.yaml"
-                    
+                    def deployCommand = "kubectl --kubeconfig=${kubeConfigPath} apply -f ${kubeConfigs}" // Folosește kubeConfigs variabila pentru a specifica fișierul YAML
                     // Executăm comanda folosind 'sh'
                     sh deployCommand
                 }
