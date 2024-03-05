@@ -16,7 +16,7 @@ spec:
         app: wather-app-1
     spec:
       containers:
-        - image: registry.cosmin-lab.cloud:5000/wather-app:5
+        - image: registry.cosmin-lab.cloud:5000/wather-app:1
           imagePullPolicy: Always
           name: wather-app
       imagePullSecrets:
