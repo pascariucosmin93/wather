@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wather-app-5
-  name: wather-app-5
+    app: wather-app-1
+  name: wather-app-1
   namespace: jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wather-app-5
+      app: wather-app-1
   template:
     metadata:
       labels:
-        app: wather-app-5
+        app: wather-app-1
     spec:
       containers:
         - image: registry.cosmin-lab.cloud:5000/wather-app:5
@@ -31,7 +31,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: wather-app-5
+    app: wather-app-1
   ports:
     - protocol: TCP
       port: 80
