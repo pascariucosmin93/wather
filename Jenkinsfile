@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Source') {
             steps {
-                git branch: 'main', url: 'https://github.com/pascariucosmin93/weather.git' // Corectează URL-ul pentru clonarea repo-ului
+                git branch: 'main', url: 'https://github.com/pascariucosmin93/wather.git' // Corectează URL-ul pentru clonarea repo-ului
             }
         }
         
