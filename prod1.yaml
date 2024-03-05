@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: weather-app
-          image: registry.cosmin-lab.cloud:5000/weather-app:1
+          image: registry.cosmin-lab.cloud:5000/wather-app:1
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -35,4 +35,4 @@ spec:
       port: 80
       targetPort: 80
   type: NodePort # Specificăm tipul serviciului ca fiind NodePort
-  nodePort: 30004 # Specificăm portul NodePort aici
+  nodePort: 30005 # Specificăm portul NodePort aici
