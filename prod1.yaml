@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wather-app-1
-  name: wather-app-1
+    app: weather-app-1
+  name: weather-app-1
   namespace: jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wather-app-1
+      app: weather-app-1
   template:
     metadata:
       labels:
-        app: wather-app-1
+        app: weather-app-1
     spec:
       containers:
-        - image: registry.cosmin-lab.cloud:5000/wather-app:1
+        - image: registry.cosmin-lab.cloud:5000/weather-app:1
           imagePullPolicy: Always
-          name: wather-app
+          name: weather-app
       imagePullSecrets:
         - name: regcred2
 
@@ -26,14 +26,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wather-app-nodeport
+  name: weather-app-nodeport
   namespace: jenkins
 spec:
   type: NodePort
   selector:
-    app: wather-app-1
+    app: weather-app-1
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080  
-      nodePort: 30001 
+      targetPort: 80  
+      nodePort: 30001

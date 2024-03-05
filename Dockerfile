@@ -1,5 +1,5 @@
 # Folosim imaginea oficială Nginx ca bază
-FROM nginx:latest
+FROM nginx:1.25.4
 
 # Exponăm portul 80 pentru a putea accesa serverul web
 EXPOSE 80
