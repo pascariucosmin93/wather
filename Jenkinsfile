@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         registry = "registry.cosmin-lab.cloud:5000"
-        dockerImage = "wather-app" // Corectează numele imaginii pentru Docker
+        dockerImage = " weather-app" // Corectează numele imaginii pentru Docker
         dockerCredentials = 'docker-registry' // ID-ul de acreditare pentru Docker
         kubeconfigId = 'KUBECONFIG' // ID-ul kubeconfig
         kubeConfigs = 'prod1.yaml' // Fișierul de configurație Kubernetes YAML
