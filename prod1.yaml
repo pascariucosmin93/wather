@@ -36,5 +36,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30089 # Specificăm portul NodePort aici
+      nodePort: 30090 # Specificăm portul NodePort aici
   type: NodePort # Specificăm tipul serviciului ca fiind NodePort
