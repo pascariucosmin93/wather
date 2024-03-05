@@ -26,16 +26,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: myweb2
-  name: myweb2
+  name: wather-app-nodeport
   namespace: jenkins
 spec:
-  ports:
-  - nodePort: 30098
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: myweb2
   type: NodePort
+  selector:
+    app: wather-app-5
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080  
+      nodePort: 30001 
